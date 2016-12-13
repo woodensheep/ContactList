@@ -47,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                // 进入登录页面
+                // 进入注册页面
                 Intent intent = new Intent(getApplicationContext(), RegisteredActivity.class);
                 startActivityForResult(intent, REQUEST_SIGNUP);
             }
@@ -75,9 +75,11 @@ public class LoginActivity extends AppCompatActivity {
                 new Runnable() {
                     public void run() {
                         onLoginSuccess();
+
                         progressDialog.dismiss();
                     }
                 }, 3000);
+
     }
 
     @Override
@@ -99,7 +101,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onLoginSuccess() {
+        Toast.makeText(getBaseContext(), "登录成功", Toast.LENGTH_LONG).show();
         mBtnLogin.setEnabled(true);
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        startActivity(intent);
         finish();
     }
 

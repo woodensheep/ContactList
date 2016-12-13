@@ -43,7 +43,7 @@ public class WelcomActivity extends AppCompatActivity {
                             @Override
                             public void onEnd(View view) {
                                 //放大动画结束时的回调
-                                Intent intent = new Intent(WelcomActivity.this, MainActivity.class);
+                                Intent intent = new Intent(WelcomActivity.this, LoginActivity.class);
                                 startActivity(intent);
                                 WelcomActivity.this.finish();
                             }
