@@ -1,4 +1,4 @@
-package com.nandity.contactlist;
+package com.nandity.contactlist.activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -6,11 +6,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.nandity.contactlist.R;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
