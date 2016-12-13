@@ -1,6 +1,7 @@
 package com.nandity.contactlist;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
@@ -13,6 +14,8 @@ import android.widget.Toast;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+
+import static android.R.attr.name;
 
 
 public class RegisteredActivity extends AppCompatActivity {
@@ -27,6 +30,9 @@ public class RegisteredActivity extends AppCompatActivity {
     AppCompatButton mBtnSignup;
     @InjectView(R.id.link_login)
     TextView mLinkLogin;
+    private String mName=null;
+    private String mEmail=null;
+    private String mPassword=null;
 
 
     @Override
@@ -65,9 +71,9 @@ public class RegisteredActivity extends AppCompatActivity {
         progressDialog.setMessage("请稍后...");
         progressDialog.show();
 
-        String name = mInputName.getText().toString();
-        String email = mInputEmail.getText().toString();
-        String password = mInputPassword.getText().toString();
+        mName = mInputName.getText().toString();
+        mEmail = mInputEmail.getText().toString();
+        mPassword = mInputPassword.getText().toString();
 
 
 
@@ -85,12 +91,15 @@ public class RegisteredActivity extends AppCompatActivity {
 
     public void onSignupSuccess() {
         mBtnSignup.setEnabled(true);
-        setResult(RESULT_OK, null);
+        Intent mIntent = new Intent();
+        mIntent.putExtra("name",mName);
+        System.out.println("onSignupSuccess"+mName);
+        setResult(RESULT_OK, mIntent);
         finish();
     }
 
     public void onSignupFailed() {
-        Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseContext(), "注册失败", Toast.LENGTH_LONG).show();
 
         mBtnSignup.setEnabled(true);
     }

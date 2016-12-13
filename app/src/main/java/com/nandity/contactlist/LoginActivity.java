@@ -52,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
     public void login() {
         Log.d(TAG, "登录");
 
@@ -68,9 +69,6 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setMessage("Authenticating...");
         progressDialog.show();
 
-        String email = mInputName.getText().toString();
-        String password = mInputPassword.getText().toString();
-
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
@@ -81,13 +79,14 @@ public class LoginActivity extends AppCompatActivity {
                 }, 3000);
     }
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d(TAG, "onActivityResult");
         if (requestCode == REQUEST_SIGNUP) {
             if (resultCode == RESULT_OK) {
-
-                this.finish();
+                mInputName.setText(data.getStringExtra("name"));
+                Log.d(TAG, data.getStringExtra("name"));
+//                mInputPassword.setText(data.getStringExtra("password"));
             }
         }
     }
@@ -115,7 +114,7 @@ public class LoginActivity extends AppCompatActivity {
         String name = mInputName.getText().toString();
         String password = mInputPassword.getText().toString();
 
-        if (name.isEmpty() || !android.util.Patterns.PHONE.matcher(name).matches()||name.length()<8) {
+        if (name.isEmpty() || !android.util.Patterns.PHONE.matcher(name).matches() || name.length() < 8) {
             mInputName.setError("输入正确的电话号码");
             valid = false;
         } else {
