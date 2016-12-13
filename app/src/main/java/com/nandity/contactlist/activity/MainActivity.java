@@ -1,8 +1,10 @@
-package com.nandity.contactlist;
+package com.nandity.contactlist.activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.nandity.contactlist.R;
 
 public class MainActivity extends AppCompatActivity {
 
