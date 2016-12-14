@@ -12,12 +12,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nandity.contactlist.R;
+import com.nandity.contactlist.view.AnimationButton;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
 
@@ -25,8 +26,9 @@ public class LoginActivity extends AppCompatActivity {
     EditText mInputName;
     @InjectView(R.id.input_password)
     EditText mInputPassword;
-    @InjectView(R.id.btn_login)
-    AppCompatButton mBtnLogin;
+//    @InjectView(R.id.btn_login)
+//    AppCompatButton mBtnLogin;
+AnimationButton mBtnLogin;
     @InjectView(R.id.link_signup)
     TextView mLinkSignup;
 
@@ -35,13 +37,27 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.inject(this);
-        mBtnLogin.setOnClickListener(new View.OnClickListener() {
-
+        final AnimationButton mBtnLogin = (AnimationButton) findViewById(R.id.btn_login);
+        mBtnLogin.setText("登录"); //设置文本，不设置有默认值
+        mBtnLogin.setMode(AnimationButton.Mode.Hand_Finish); //设置进度条模式，不设置有默认值Mode.Auto_Finish
+        mBtnLogin.setOnAnimationButtonClickListener(new AnimationButton.OnAnimationButtonClickListener() {
             @Override
-            public void onClick(View v) {
-                login();
+            public void onClick() {
+                //stopProgress方法 仅仅在button.setMode(AnimationButton.Mode.Hand_Finish);之后才有效。
+
+                mBtnLogin.stopProgress();
+                //跳转主页面
+                forward(MainActivity.class);
+                finish();
             }
         });
+//        mBtnLogin.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//                login();
+//            }
+//        });
 
         mLinkSignup.setOnClickListener(new View.OnClickListener() {
 
@@ -69,7 +85,6 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Authenticating...");
         progressDialog.show();
-
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
@@ -103,8 +118,8 @@ public class LoginActivity extends AppCompatActivity {
     public void onLoginSuccess() {
         Toast.makeText(getBaseContext(), "登录成功", Toast.LENGTH_LONG).show();
         mBtnLogin.setEnabled(true);
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-        startActivity(intent);
+        //跳转主页面
+        forward(MainActivity.class);
         finish();
     }
 

@@ -8,7 +8,7 @@ import android.view.View;
 import com.nandity.contactlist.R;
 import com.nandity.contactlist.view.AutoZoomInImageView;
 
-public class WelcomActivity extends AppCompatActivity {
+public class WelcomActivity extends BaseActivity {
 
     private AutoZoomInImageView iv;
 
@@ -43,8 +43,7 @@ public class WelcomActivity extends AppCompatActivity {
                             @Override
                             public void onEnd(View view) {
                                 //放大动画结束时的回调
-                                Intent intent = new Intent(WelcomActivity.this, LoginActivity.class);
-                                startActivity(intent);
+                                forward(LoginActivity.class);
                                 WelcomActivity.this.finish();
                             }
                         })

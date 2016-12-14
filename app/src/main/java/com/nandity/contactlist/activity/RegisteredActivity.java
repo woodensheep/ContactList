@@ -19,7 +19,7 @@ import butterknife.InjectView;
 import static android.R.attr.name;
 
 
-public class RegisteredActivity extends AppCompatActivity {
+public class RegisteredActivity extends BaseActivity {
     private static final String TAG = "RegisteredActivity";
     @InjectView(R.id.input_name)
     EditText mInputName;
