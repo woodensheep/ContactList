@@ -5,16 +5,18 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.nandity.contactlist.R;
+import com.nandity.contactlist.view.DatePickerFragment;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
-public class PersonalDataActivity extends AppCompatActivity {
+public class PersonalDataActivity extends AppCompatActivity implements DatePickerFragment.SetInputListener{
     private static final String TAG = "PersonalDataActivity";
     private static final int REQUEST_SIGNUP = 0;
     @InjectView(R.id.data_name)
@@ -27,7 +29,6 @@ public class PersonalDataActivity extends AppCompatActivity {
     EditText mDataBirth;
     @InjectView(R.id.btn_signup)
     AppCompatButton mBtnSignup;
-    @InjectView(R.id.link_login)
     TextView mLinkLogin;
 
     @Override
@@ -39,8 +40,9 @@ public class PersonalDataActivity extends AppCompatActivity {
 
     @OnClick(R.id.data_birth)
     public void onClick() {
-        Intent intent = new Intent(getApplicationContext(), ChooseDateActivity.class);
-        startActivityForResult(intent, REQUEST_SIGNUP);
+        showDatePickerDialog();
+//        Intent intent = new Intent(getApplicationContext(), ChooseDateActivity.class);
+//        startActivityForResult(intent, REQUEST_SIGNUP);
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -54,4 +56,15 @@ public class PersonalDataActivity extends AppCompatActivity {
         }
     }
 
+    public void showDatePickerDialog(){
+        DatePickerFragment datePicker = new DatePickerFragment();
+        datePicker.show(getSupportFragmentManager(), "datePicker");
+    }
+
+    @Override
+    public void onSetInputComplete(int year, int month, int day) {
+        String birth=year + "年" + (month + 1) + "月" + day + "日  ";
+        mDataBirth.setText(birth);
+        Log.d("OnDateSet", "onLoginInputComplete:"+year+";month:"+month+";day:"+day);
+    }
 }
