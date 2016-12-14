@@ -46,9 +46,12 @@ AnimationButton mBtnLogin;
                 //stopProgress方法 仅仅在button.setMode(AnimationButton.Mode.Hand_Finish);之后才有效。
 
                 mBtnLogin.stopProgress();
-                //跳转主页面
-                forward(MainActivity.class);
-                finish();
+                if (mBtnLogin.isProgressStop()){
+                    //跳转主页面
+                    forward(MainActivity.class);
+                    finish();
+                }
+
             }
         });
 //        mBtnLogin.setOnClickListener(new View.OnClickListener() {

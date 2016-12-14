@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+
 import com.nandity.contactlist.R;
 import com.nandity.contactlist.view.AnimationButton;
 
@@ -29,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick() {
                 //stopProgress方法 仅仅在button.setMode(AnimationButton.Mode.Hand_Finish);之后才有效。
                 button.stopProgress();
+                Intent i= new Intent(MainActivity.this,PersonalDataActivity.class);
+                startActivity(i);
             }
         });
 
