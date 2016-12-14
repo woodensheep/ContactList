@@ -3,6 +3,8 @@ package com.nandity.contactlist.activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 
 import com.nandity.contactlist.R;
@@ -10,11 +12,13 @@ import com.nandity.contactlist.view.AnimationButton;
 
 public class MainActivity extends AppCompatActivity {
 
+    private Button btnContact;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         final AnimationButton button = (AnimationButton) findViewById(R.id.button);
+        btnContact= (Button) findViewById(R.id.button2);
 // button.setTextSizeTouch(25); //设置按下时字体的大小，不设置有默认值
 // button.setStrokeProgress(10); //设置进度条的厚度，不设置有默认值
 // button.setColorBase(Color.GREEN); //设置整体基色，不设置有默认值
@@ -35,5 +39,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btnContact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i= new Intent(MainActivity.this,ContactListActivity.class);
+                startActivity(i);
+            }
+        });
     }
 }
